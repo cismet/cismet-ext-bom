@@ -159,6 +159,12 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            
+            <!--
+                UNRESOLVEABLE: 
+                - woodstox 3 / 4 / asl / lgpl dependency mess
+                - STAX 1 / 2 vs xmp-apis vs woodstox dependency mess
+            -->
 
             <!-- END 'problementic' dependencies -->
             

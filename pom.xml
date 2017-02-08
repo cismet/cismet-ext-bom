@@ -16,12 +16,19 @@
     <name>cismet ext BOM</name>
     <description>A "bill of materials" (BOM) POM for external dependencies used in cids projects.</description>
     
-    <!-- define version properties of deoendencies with more than one artifact -->
+    <!-- 
+        define version properties of dependencies with more than one artifact 
+    -->
     <properties>
         <slf4j.version>1.7.22</slf4j.version>
         <jersey.version>1.17.1</jersey.version>
+        <!-- 
+            check woodstox-core-asl version when jackson.version changes! What a mess!
+        -->
         <jackson.version>2.2.2</jackson.version>
-        <!-- Jetty 6 uses Servlet API 2.4! -->
+        <!-- 
+            Jetty 6 uses its own Servlet API 2.4! What a mess!
+        -->
         <jetty.version>6.1.25</jetty.version>
     </properties>
     
@@ -165,6 +172,13 @@
                 - woodstox 3 / 4 / asl / lgpl dependency mess
                 - STAX 1 / 2 vs xmp-apis vs woodstox dependency mess
             -->
+            <dependency>
+                <groupId>org.codehaus.woodstox</groupId>
+                <artifactId>woodstox-core-asl</artifactId>
+                <!-- WARNIG: always specify the same version as Jackson does! -->
+                <version>4.1.4</version>
+            </dependency>
+            
 
             <!-- END 'problementic' dependencies -->
             

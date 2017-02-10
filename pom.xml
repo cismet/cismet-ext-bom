@@ -30,7 +30,11 @@
             Jetty 6 uses its own Servlet API 2.4! What a mess!
         -->
         <jetty.version>6.1.25</jetty.version>
-        <powermock.version>1.6.6</powermock.version>
+        <!--
+            Powermock and Mockito Versions must be aligned!
+            See https://github.com/powermock/powermock/wiki/MockitoUsage
+        -->
+        <powermock.version>1.6.4</powermock.version>
     </properties>
     
     <scm>
@@ -365,15 +369,22 @@
                 <artifactId>jackson-jaxrs-base</artifactId>
                 <version>${jackson.version}</version>
             </dependency>
+            <!--
+                In general 'runtime' is the correct scope for jaxrs providers
+                as they are auto-discovered 
+                See https://github.com/FasterXML/jackson-jaxrs-json-provider/blob/master/README.md
+            -->
             <dependency>
                 <groupId>com.fasterxml.jackson.jaxrs</groupId>
                 <artifactId>jackson-jaxrs-json-provider</artifactId>
                 <version>${jackson.version}</version>
+                <scope>runtime</scope>
             </dependency> 
             <dependency>
                 <groupId>com.fasterxml.jackson.jaxrs</groupId>
                 <artifactId>jackson-jaxrs-xml-provider</artifactId>
                 <version>${jackson.version}</version>
+                 <scope>runtime</scope>
             </dependency>
             
             <!-- 

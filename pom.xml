@@ -431,6 +431,16 @@
                 <artifactId>deegree-core-style</artifactId>
                 <version>${deegree.version}</version>
             </dependency>
+            
+            <!--
+                Another deegree odditiy: what is 1.0-deegreeversion ?!
+            -->
+            <dependency>
+                <groupId>jgridshift</groupId>
+                <artifactId>jgridshift</artifactId>
+                <version>1.0-deegreeversion</version>
+            </dependency>
+            
             <!-- END 'problementic' dependencies -->
             
             <!-- BEGIN: verified provided dependencies 
@@ -504,6 +514,22 @@
                 <groupId>commons-io</groupId>
                 <artifactId>commons-io</artifactId>
                 <version>2.5</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>3.2.2</version>
+            </dependency>
+            
+            <!-- 
+               WARNING: The migration from Apache Commons Pool 1.x to 2.x will require some code changes. 
+               See https://commons.apache.org/proper/commons-pool/index.html
+            -->
+            <dependency>
+                <groupId>commons-pool</groupId>
+                <artifactId>commons-pool</artifactId>
+                <version>1.6</version>
             </dependency>
             
             <!-- 

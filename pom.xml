@@ -35,6 +35,12 @@
             See https://github.com/powermock/powermock/wiki/MockitoUsage
         -->
         <powermock.version>1.6.4</powermock.version>
+        
+        <!--
+            WARNING: cismet-deegree version is 2.3.8!
+        -->
+        <deegree.version>3.2.3</deegree.version>
+        
     </properties>
     
     <scm>
@@ -274,8 +280,141 @@
                 <artifactId>javassist</artifactId>
                 <!-- ATTENTION: Check when updating PowerMock! -->
                 <version>3.21.0-GA</version>
+            </dependency>    
+            
+            <!--
+                Avoid JASPER XML API problems 
+            -->
+            <dependency>
+                <groupId>net.sf.jasperreports</groupId>
+                <artifactId>jasperreports</artifactId>
+                <version>6.0.4</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>javax.xml.stream</groupId>
+                        <artifactId>stax-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>stax</groupId>
+                        <artifactId>stax-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>jakarta-regexp</groupId>
+                        <artifactId>jakarta-regexp</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>stax</groupId>
+                        <artifactId>stax</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>xml-apis</groupId>
+                        <artifactId>xml-apis</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+                
+            <!-- Degree XML API / Parser Issues -->
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-commons</artifactId>
+                <version>${deegree.version}</version>
+                <type>jar</type>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.geronimo.specs</groupId>
+                        <artifactId>geronimo-stax-api_1.0_spec</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.codehaus.woodstox</groupId>
+                        <artifactId>wstx-asl</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.codehaus.woodstox</groupId>
+                        <artifactId>woodstox-core-lgpl</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>javassist</groupId>
+                        <artifactId>javassist</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>xml-apis</groupId>
+                        <artifactId>xml-apis</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>  
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-rendering-2d</artifactId>
+                <version>${deegree.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>jai</groupId>
+                        <artifactId>jai-codec</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>jai</groupId>
+                        <artifactId>jai-imageio</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>  
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-geometry</artifactId>
+                <version>${deegree.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>jai</groupId>
+                        <artifactId>jai-core</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>            
-
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-tile</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-annotations</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-base</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-coverage</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-cs</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-filterfunctions</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-style</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>
             <!-- END 'problementic' dependencies -->
             
             <!-- BEGIN: verified provided dependencies 

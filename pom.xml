@@ -480,6 +480,16 @@
                 </exclusions>
             </dependency>
             
+            <!--
+                It seems save to upgrade from commons-io 1.4 to 2.x according to
+                https://commons.apache.org/proper/commons-io/upgradeto2_0.html
+            -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.5</version>
+            </dependency>
+            
             <!-- 
                 Must upgrade to jackson > 2.8.3 to be able to use BOM! 
             -->

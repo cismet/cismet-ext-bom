@@ -394,6 +394,16 @@
                 <groupId>org.deegree</groupId>
                 <artifactId>deegree-core-base</artifactId>
                 <version>${deegree.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>jai</groupId>
+                        <artifactId>jai-codec</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>jai</groupId>
+                        <artifactId>jai-imageio</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.deegree</groupId>
@@ -404,6 +414,12 @@
                 <groupId>org.deegree</groupId>
                 <artifactId>deegree-core-cs</artifactId>
                 <version>${deegree.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>jai</groupId>
+                        <artifactId>jai-core</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.deegree</groupId>

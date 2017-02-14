@@ -698,10 +698,15 @@
                 <version>1.5.2</version>
             </dependency>
             
+            <!--
+                Consider upgrading to 1.6.4
+                -> org.jdesktop.swingx.graphics.GraphicsUtilities 
+                moved to org.jdesktop.swingx.util.GraphicsUtilities;
+            -->
             <dependency>
                 <groupId>org.swinglabs</groupId>
                 <artifactId>swingx</artifactId>
-                <version>1.6.4</version>
+                <version>1.6</version>
             </dependency>
             
             <!-- END: verified dependencies -->

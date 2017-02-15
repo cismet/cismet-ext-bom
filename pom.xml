@@ -40,7 +40,10 @@
             WARNING: cismet-deegree version is 2.3.8!
         -->
         <deegree.version>3.2.3</deegree.version>
-        
+        <!--
+            TODO: Manage netbeans dependencies
+        -->
+        <netbeans.version>RELEASE701</netbeans.version>
     </properties>
     
     <scm>
@@ -246,6 +249,7 @@
 
             <!--
                 exclude outdated XML APIs and Parsers from custom cismet-deegree
+                DANGER: Place cismet-deegree:jar before other deegree jars!   
             -->
             <dependency>
                 <groupId>de.cismet.custom</groupId>
@@ -314,6 +318,14 @@
                         <groupId>xml-apis</groupId>
                         <artifactId>xml-apis</artifactId>
                     </exclusion>
+                    <!--
+                        FIXME: correct group id is org.jfree, not jfreechart!
+                        Wrong jfreechart dependency in jasper!
+                    -->
+                    <!--<exclusion>
+                        <groupId>jfree</groupId>
+                        <artifactId>jfreechart</artifactId>
+                    </exclusion>-->
                 </exclusions>
             </dependency>
                 
@@ -521,6 +533,16 @@
                 <artifactId>commons-collections</artifactId>
                 <version>3.2.2</version>
             </dependency>
+            
+            <!--
+                TODO: Manage latest version of commons-codec to avoid upper bound dependencies errors!
+                https://commons.apache.org/proper/commons-codec/changes-report.html
+            -->
+            <!--<dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.10</version>
+            </dependency>-->
             
             <!-- 
                WARNING: The migration from Apache Commons Pool 1.x to 2.x will require some code changes. 

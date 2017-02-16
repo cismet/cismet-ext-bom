@@ -91,7 +91,7 @@
                 <artifactId>testng</artifactId>
                 <version>6.10</version>
                 <scope>test</scope>
-                <!--<exclusions>
+                <exclusions>
                     <exclusion>
                         <artifactId>junit</artifactId>
                         <groupId>junit</groupId>
@@ -104,7 +104,7 @@
                         <artifactId>bsh</artifactId>
                         <groupId>org.beanshell</groupId>
                     </exclusion>
-                </exclusions>-->
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>xmlunit</groupId>

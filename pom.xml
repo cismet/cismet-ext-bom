@@ -704,6 +704,16 @@
                 <version>1.6</version>
             </dependency>
             
+           <!--
+                Prefer this to org.jdesktop:swing-worker since org.swinglabs:swingx
+                depends also on this! 
+           -->
+            <dependency>
+                <groupId>org.swinglabs</groupId>
+                <artifactId>swing-worker</artifactId>
+                <version>1.1</version>
+            </dependency>
+            
             <!-- END: verified dependencies -->
             
             

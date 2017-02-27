@@ -702,16 +702,25 @@
                 <groupId>org.swinglabs</groupId>
                 <artifactId>swingx</artifactId>
                 <version>1.6</version>
+                <type>jar</type>
             </dependency>
             
-           <!--
-                Prefer this to org.jdesktop:swing-worker since org.swinglabs:swingx
-                depends also on this! 
-           -->
+            <!--
+                 Prefer this to org.jdesktop:swing-worker since org.swinglabs:swingx
+                 depends also on this! 
+            -->
             <dependency>
                 <groupId>org.swinglabs</groupId>
                 <artifactId>swing-worker</artifactId>
                 <version>1.1</version>
+                <type>jar</type>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.swinglabs</groupId>
+                <artifactId>swing-layout</artifactId>
+                <version>1.0.3</version>
+                <type>jar</type>
             </dependency>
             
             <!-- END: verified dependencies -->

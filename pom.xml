@@ -781,6 +781,12 @@
                 <type>jar</type>
             </dependency>
             <dependency>
+                <groupId>org.netbeans.modules</groupId>
+                <artifactId>org-netbeans-libs-javacup</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
                 <groupId>org.netbeans.api</groupId>
                 <artifactId>org-openide-dialogs-i18n-de</artifactId>
                 <!-- ${netbeans.version} does not exist! -->

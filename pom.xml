@@ -41,7 +41,8 @@
         -->
         <deegree.version>3.2.3</deegree.version>
         <!--
-            TODO: Manage netbeans dependencies
+            Managed netbeans dependencies
+            WARNING: org-openide-dialogs-i18n-de:RELEASE701 not available!
         -->
         <netbeans.version>RELEASE701</netbeans.version>
     </properties>
@@ -723,21 +724,75 @@
                 <type>jar</type>
             </dependency>
             
+            <dependency>
+                <groupId>edu.umd</groupId>
+                <artifactId>piccolo</artifactId>
+                <version>1.2</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>edu.umd</groupId>
+                <artifactId>piccolox</artifactId>
+                <version>1.2</version>
+                <type>jar</type>
+            </dependency>
+            
+            <!-- Netbeans Dependencies -->
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-openide-util</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-openide-awt</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-openide-util-lookup</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-openide-dialogs</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-netbeans-api-progress</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-openide-filesystems</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-netbeans-api-visual</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-openide-dialogs-i18n-de</artifactId>
+                <!-- ${netbeans.version} does not exist! -->
+                <version>RELEASE69</version>
+                <type>jar</type>
+            </dependency>
+            
             <!-- END: verified dependencies -->
             
             
             <!-- DISABLED. Update and enable in next release! -->
-            <!--            <dependency>
-        <groupId>log4j</groupId>
-        <artifactId>log4j</artifactId>
-        <version>1.2.17</version>
-    </dependency>
-    <dependency> 
-        <groupId>org.projectlombok</groupId> 
-        <artifactId>lombok</artifactId> 
-        <version>1.16.12</version> 
-        <scope>provided</scope> 
-    </dependency>
+            <!--            
     <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
@@ -851,12 +906,12 @@
             <dependency>
                 <groupId>org.netbeans.api</groupId>
                 <artifactId>org-openide-util</artifactId>
-                <version>RELEASE701</version>
+                <version>${netbeans.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.netbeans.api</groupId>
                 <artifactId>org-openide-util-lookup</artifactId>
-                <version>RELEASE701</version>
+                <version>${netbeans.version}</version>
             </dependency>-->
         
             <!-- TEST DEPENDENCIES -->

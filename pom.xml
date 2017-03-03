@@ -27,6 +27,11 @@
         -->
         <jackson.version>2.2.3</jackson.version>
         <!-- 
+            Legacy Jackson 1.x version still required by swagger 1.0.1
+            Manage to avoid upper bound dependencies error.
+        -->
+        <jackson.legacy.version>1.9.2</jackson.legacy.version>
+        <!-- 
             Jetty 6 uses its own Servlet API 2.4! What a mess!
         -->
         <jetty.version>6.1.25</jetty.version>
@@ -439,6 +444,31 @@
                 <groupId>jgridshift</groupId>
                 <artifactId>jgridshift</artifactId>
                 <version>1.0-deegreeversion</version>
+            </dependency>
+            
+            <!--
+                TODO: Upgrade to recent swagger version and get rid of the
+                old jackson 1.x dependencies!
+            -->
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-core-asl</artifactId>
+                <version>${jackson.legacy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-jaxrs</artifactId>
+                <version>${jackson.legacy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${jackson.legacy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-xc</artifactId>
+                <version>${jackson.legacy.version}</version>
             </dependency>
             
             <!-- END 'problementic' dependencies -->

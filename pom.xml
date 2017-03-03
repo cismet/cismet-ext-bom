@@ -523,6 +523,16 @@
             </dependency>
             
             <!--
+            Manage commons-codec in its latest version to resolve numerous 
+            'require upper bound dependencies errors' of maven enforcer.
+            -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.10</version>
+            </dependency>
+            
+            <!--
                 TODO: Manage latest version of commons-codec to avoid upper bound dependencies errors!
                 https://commons.apache.org/proper/commons-codec/changes-report.html
             -->

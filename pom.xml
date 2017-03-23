@@ -1,0 +1,917 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>de.cismet</groupId>
+        <artifactId>cismet-parent</artifactId>
+        <version>5.0-SNAPSHOT</version>
+    </parent>
+
+    <groupId>de.cismet</groupId>
+    <artifactId>cismet-ext-bom</artifactId>
+    <version>5.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    
+    <name>cismet ext BOM</name>
+    <description>A "bill of materials" (BOM) POM for external dependencies used in cids projects.</description>
+    
+    <!-- 
+        define version properties of dependencies with more than one artifact 
+    -->
+    <properties>
+        <slf4j.version>1.7.22</slf4j.version>
+        <jersey.version>1.17.1</jersey.version>
+        <!-- 
+            check woodstox-core-asl version when jackson.version changes! What a mess!
+        -->
+        <jackson.version>2.2.3</jackson.version>
+        <!-- 
+            Legacy Jackson 1.x version still required by swagger 1.0.1
+            Manage to avoid upper bound dependencies error.
+        -->
+        <jackson.legacy.version>1.9.2</jackson.legacy.version>
+        <!-- 
+            Jetty 6 uses its own Servlet API 2.4! What a mess!
+            TODO: Update, remove or change the custom org.mortbay.jetty:servlet-api 
+            dependency when org.mortbay.jetty is upgraded!
+        -->
+        <jetty.version>6.1.25</jetty.version>
+        <!--
+            Powermock and Mockito Versions must be aligned!
+            See https://github.com/powermock/powermock/wiki/MockitoUsage
+        -->
+        <powermock.version>1.6.4</powermock.version>
+        
+        <!--
+            WARNING: cismet-deegree version is 2.3.8!
+        -->
+        <deegree.version>3.2.3</deegree.version>
+        <!--
+            Managed netbeans dependencies
+            WARNING #1:     org-openide-dialogs-i18n-de:RELEASE701 not available!
+            WARNING #2:     netbeans-visual-diff-standalone requires RELEASE731,
+                            See https://github.com/cismet/cismet-ext-bom/issues/2 and
+                            https://cismet.slack.com/files/pascal.dihe/F4C0V99H9/netbeans-visual-diff-standalone
+        -->
+        <netbeans.version>RELEASE701</netbeans.version>
+    </properties>
+    
+    <scm>
+        <connection>https://github.com/cismet/cismet-ext-bom.git</connection>
+        <developerConnection>scm:git:git@github.com:cismet/cismet-ext-bom.git</developerConnection>
+        <url>https://github.com/cismet/cismet-ext-bom</url>
+        <tag>HEAD</tag>
+    </scm>
+    
+    <ciManagement>
+        <system>jenkins</system>
+        <url>https://ci.cismet.de/job/cismet-ext-bom/</url>
+    </ciManagement>
+    
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/cismet/cismet-ext-bom/issues</url>
+    </issueManagement>
+    
+    <dependencyManagement> 
+        <dependencies>
+            <!-- BEGIN: TEST dependencies -->
+            <!-- TEST dependencies from global-parent v2 -->
+            <dependency>
+                <groupId>org.apache.maven.surefire</groupId>
+                <artifactId>surefire-junit4</artifactId>
+                <version>2.19.1</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
+            <!-- TEST dependencies from global-parent v3 -->
+            <!--<dependency>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.19.1</version>
+                <scope>test</scope>
+            </dependency>-->
+            <dependency>
+                <groupId>org.testng</groupId>
+                <artifactId>testng</artifactId>
+                <version>6.10</version>
+                <scope>test</scope>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>junit</artifactId>
+                        <groupId>junit</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>snakeyaml</artifactId>
+                        <groupId>org.yaml</groupId>
+                    </exclusion>
+                    <exclusion>
+                        <artifactId>bsh</artifactId>
+                        <groupId>org.beanshell</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>xmlunit</groupId>
+                <artifactId>xmlunit</artifactId>
+                <version>1.6</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>1.7.1</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.tngtech.java</groupId>
+                <artifactId>junit-dataprovider</artifactId>
+                <version>1.12.0</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.mockito</groupId>
+                <artifactId>mockito-core</artifactId>
+                <version>1.10.19</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-api-mockito</artifactId>
+                <version>${powermock.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-core</artifactId>
+                <version>${powermock.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.powermock</groupId>
+                <artifactId>powermock-module-junit4</artifactId>
+                <version>${powermock.version}</version>
+                <scope>test</scope>
+            </dependency>
+        <!-- END: TEST dependencies -->    
+            
+            <!-- BEGIN 'problementic' dependencies
+            Define dependencies with know issues.
+            -->
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${slf4j.version}</version>
+                <scope>runtime</scope>
+                <optional>true</optional>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${slf4j.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-nop</artifactId>
+                <version>${slf4j.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            <!--
+                xml-apis & xerces
+                See http://stackoverflow.com/questions/11677572/dealing-with-xerces-hell-in-java-maven
+                
+                Set to provided to force usage of JDK XML Parser APIs
+            -->
+            <dependency>
+                <groupId>xml-apis</groupId>
+                <artifactId>xml-apis</artifactId>
+                <version>1.4.01</version>
+            </dependency>
+            <dependency>
+                <groupId>xerces</groupId>
+                <artifactId>xercesImpl</artifactId>
+                <version>2.11.0</version>
+            </dependency>
+            
+            <!--
+                All JDOM versions are available in the 'jdom' or 'jdom2' artifact in the org.jdom group on Maven.
+                The maven artifacts are a mess with early JDOM 2.x versions appearing in the 'jdom' artifacts, 
+                and later 2.x versions in the 'jdom2' artifact. Maven does not allow the fixing of mistakes, 
+                so maven users wil just have to live with it as it is.
+                If your project is one that requires both JDOM 1.x and 2.x, then you can 
+                also use the 'jdom-legacy' artifact to pull in version 1.1.3 (or later 1.x version).
+                http://www.jdom.org/docs/faq.html#a0045
+            -->
+            <dependency>
+                <!-- won't update to jdom2 because of bigger changes and some issues -->
+                <groupId>org.jdom</groupId>
+                <artifactId>jdom-legacy</artifactId>
+                <version>1.1.3</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>javax.media</groupId>
+                <artifactId>jai_core</artifactId>
+                <version>1.1.3</version>
+            </dependency>
+            
+            <!-- 
+                WARNING: Inofficial Degree JAI dependencies!
+            -->
+            <dependency>
+                <groupId>jai</groupId>
+                <artifactId>jai-codec</artifactId>
+                <version>1.1.3</version>
+            </dependency>
+            <dependency>
+                <groupId>jai</groupId>
+                <artifactId>jai-core</artifactId>
+                <version>1.1.3</version>
+            </dependency>
+            <dependency>
+                <groupId>jai</groupId>
+                <artifactId>jai-mlibwrapper</artifactId>
+                <version>1.1.3</version>
+            </dependency>
+            <!--
+                WARNING: The licence for jai_imageio doesn't allow for it to be distributed.
+            -->
+            <dependency>
+                <groupId>jai</groupId>
+                <artifactId>jai-imageio</artifactId>
+                <version>1.1.3</version>
+            </dependency>
+
+            <!--
+                exclude outdated XML APIs and Parsers from custom cismet-deegree
+                DANGER: Place cismet-deegree:jar before other deegree jars!   
+            -->
+            <dependency>
+                <groupId>de.cismet.custom</groupId>
+                <artifactId>cismet-deegree</artifactId>
+                <version>2.3.8</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>jdom</groupId>
+                        <artifactId>jdom</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>xerces</groupId>
+                        <artifactId>xmlParserAPIs</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            
+            <!--
+                UNRESOLVEABLE: 
+                - woodstox 3 / 4 / asl / lgpl dependency mess
+                - STAX 1 / 2 vs xmp-apis vs woodstox dependency mess
+            -->
+            <dependency>
+                <groupId>org.codehaus.woodstox</groupId>
+                <artifactId>woodstox-core-asl</artifactId>
+                <!-- WARNING always specify the same version as Jackson does! -->
+                <version>4.1.4</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.javassist</groupId>
+                <artifactId>javassist</artifactId>
+                <!-- ATTENTION: Check when updating PowerMock! -->
+                <version>3.21.0-GA</version>
+            </dependency>    
+            
+            <!--
+                Resolve Require upper bound dependencies error for 
+                com.lowagie:itext:2.0.8 from org.xhtmlrenderer:core-renderer:R8
+                
+                -> Use the same version as net.sf.jasperreports:jasperreports:6.0.4
+                WARNING: Update also com.lowagie:itext:2.0.8 when updating jasperreports!
+            -->
+            <dependency>
+                <groupId>com.lowagie</groupId>
+                <artifactId>itext</artifactId>
+                <version>2.1.7.js2</version>
+                <scope>provided</scope>
+            </dependency>
+            
+            <!--
+                Avoid JASPER XML API problems 
+                WARNING: Update also com.lowagie:itext:2.0.8 when updating jasperreports!
+            -->
+            <dependency>
+                <groupId>net.sf.jasperreports</groupId>
+                <artifactId>jasperreports</artifactId>
+                <version>6.0.4</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>javax.xml.stream</groupId>
+                        <artifactId>stax-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>stax</groupId>
+                        <artifactId>stax-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>jakarta-regexp</groupId>
+                        <artifactId>jakarta-regexp</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>stax</groupId>
+                        <artifactId>stax</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>xml-apis</groupId>
+                        <artifactId>xml-apis</artifactId>
+                    </exclusion>
+                    <!--
+                        FIXME: correct group id is org.jfree, not jfreechart!
+                        Wrong jfreechart dependency in jasper!
+                    -->
+                    <!--<exclusion>
+                        <groupId>jfree</groupId>
+                        <artifactId>jfreechart</artifactId>
+                    </exclusion>-->
+                </exclusions>
+            </dependency>
+                
+            <!-- Degree XML API / Parser Issues -->
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-commons</artifactId>
+                <version>${deegree.version}</version>
+                <type>jar</type>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.apache.geronimo.specs</groupId>
+                        <artifactId>geronimo-stax-api_1.0_spec</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-log4j12</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.codehaus.woodstox</groupId>
+                        <artifactId>wstx-asl</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.codehaus.woodstox</groupId>
+                        <artifactId>woodstox-core-lgpl</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>javassist</groupId>
+                        <artifactId>javassist</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>xml-apis</groupId>
+                        <artifactId>xml-apis</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>  
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-rendering-2d</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>  
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-geometry</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>            
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-tile</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-annotations</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-base</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-coverage</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-cs</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-filterfunctions</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.deegree</groupId>
+                <artifactId>deegree-core-style</artifactId>
+                <version>${deegree.version}</version>
+            </dependency>
+            
+            <!--
+                Another deegree odditiy: what is 1.0-deegreeversion ?!
+            -->
+            <dependency>
+                <groupId>jgridshift</groupId>
+                <artifactId>jgridshift</artifactId>
+                <version>1.0-deegreeversion</version>
+            </dependency>
+            
+            <!--
+                TODO: Upgrade to recent swagger version and get rid of the
+                old jackson 1.x dependencies!
+            -->
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-core-asl</artifactId>
+                <version>${jackson.legacy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-jaxrs</artifactId>
+                <version>${jackson.legacy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${jackson.legacy.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-xc</artifactId>
+                <version>${jackson.legacy.version}</version>
+            </dependency>
+            
+            <!-- END 'problementic' dependencies -->
+            
+            <!-- BEGIN: verified provided dependencies 
+                scope of those dependencies must be set to provided!
+            -->
+            <!-- 
+            Servlet API 2.5 / Standard Location 
+            WARNING: Jetty uses org.mortbay.jetty:servlet-api instead of javax.servlet:servlet-api :-(
+            -->
+            <!--<dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
+            </dependency>
+            -->
+            
+            <!--
+                TODO: Update, remove or change this custom servlet-api dependency
+                when org.mortbay.jetty is upgraded!
+            -->
+            <dependency>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5-20081211</version>
+                <scope>compile</scope>
+                <type>jar</type>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.16.12</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- END: verified provided dependencies -->
+            
+            
+            <!-- BEGIN: verified provided dependencies 
+                scope of those dependencies must be set to runtime!
+            -->
+            <dependency>
+                <groupId>org.postgis</groupId>
+                <artifactId>postgis-jdbc</artifactId>
+                <version>1.3.3</version>
+                <scope>runtime</scope>
+                <!--
+                    WARNING: org.postgis:postgis-stubs overrides org/postgresql/PGConnection.class of postgresql:postgresql with empty stub
+                -->
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.postgis</groupId>
+                        <artifactId>postgis-stubs</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <!-- END: verified runtime dependencies -->
+
+            <!-- BEGIN: verified dependencies -->
+            <dependency>
+                <groupId>log4j</groupId>
+                <artifactId>log4j</artifactId>
+                <version>1.2.17</version>
+            </dependency>
+                 
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>3.1</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            
+            <!--
+                It seems save to upgrade from commons-io 1.4 to 2.x according to
+                https://commons.apache.org/proper/commons-io/upgradeto2_0.html
+            -->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.5</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>commons-collections</groupId>
+                <artifactId>commons-collections</artifactId>
+                <version>3.2.2</version>
+            </dependency>
+            
+            <!--
+            Manage commons-codec in its latest version to resolve numerous 
+            'require upper bound dependencies errors' of maven enforcer.
+            -->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.10</version>
+            </dependency>
+            
+            <!--
+                TODO: Manage latest version of commons-codec to avoid upper bound dependencies errors!
+                https://commons.apache.org/proper/commons-codec/changes-report.html
+            -->
+            <!--<dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>1.10</version>
+            </dependency>-->
+            
+            <!-- 
+               WARNING: The migration from Apache Commons Pool 1.x to 2.x will require some code changes. 
+               See https://commons.apache.org/proper/commons-pool/index.html
+            -->
+            <dependency>
+                <groupId>commons-pool</groupId>
+                <artifactId>commons-pool</artifactId>
+                <version>1.6</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>commons-digester</groupId>
+                <artifactId>commons-digester</artifactId>
+                <version>2.1</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.6</version>
+                <type>jar</type>
+            </dependency>
+            
+            <!-- 
+                Must upgrade to jackson > 2.8.3 to be able to use BOM! 
+            -->
+            <!--
+            <dependency>
+                <groupId>com.fasterxml.jackson</groupId>
+                <artifactId>jackson-bom</artifactId>
+                <version>${jackson.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency> 
+            -->
+            
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency> 
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.module</groupId>
+                <artifactId>jackson-module-jaxb-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency> 
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-xml</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.dataformat</groupId>
+                <artifactId>jackson-dataformat-csv</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.jaxrs</groupId>
+                <artifactId>jackson-jaxrs-base</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <!--
+                In general 'runtime' is the correct scope for jaxrs providers
+                as they are auto-discovered 
+                See https://github.com/FasterXML/jackson-jaxrs-json-provider/blob/master/README.md
+            -->
+            <dependency>
+                <groupId>com.fasterxml.jackson.jaxrs</groupId>
+                <artifactId>jackson-jaxrs-json-provider</artifactId>
+                <version>${jackson.version}</version>
+                <scope>runtime</scope>
+            </dependency> 
+            <dependency>
+                <groupId>com.fasterxml.jackson.jaxrs</groupId>
+                <artifactId>jackson-jaxrs-xml-provider</artifactId>
+                <version>${jackson.version}</version>
+                <scope>runtime</scope>
+            </dependency>
+            
+            <!-- 
+                consider upgrading to new jersey version! 
+                -> org/glassfish/jersey: NO BOM availavle for com.sun.jersey!
+            -->
+            <!--<dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-bom</artifactId>
+                <version>${jersey.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>-->
+            
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-server</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-core</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-servlet</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.jersey.contribs</groupId>
+                <artifactId>jersey-apache-client</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.jersey.contribs</groupId>
+                <artifactId>jersey-multipart</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-client</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-json</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty</artifactId>
+                <version>${jetty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-util</artifactId>
+                <version>6.1.25</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-embedded</artifactId>
+                <version>${jetty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mortbay.jetty</groupId>
+                <artifactId>jetty-sslengine</artifactId>
+                <version>${jetty.version}</version>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.vividsolutions</groupId>
+                <artifactId>jts</artifactId>
+                <version>1.13</version>
+            </dependency>
+            
+            <!-- 
+                jaxen > 1.1.3 as required by org.apache.ws.commons.axiom:axiom-api:1.2.13
+            -->
+            <dependency>
+                <groupId>jaxen</groupId>
+                <artifactId>jaxen</artifactId>
+                <version>1.1.4</version>
+            </dependency>    
+            
+            <!-- 
+                java3d vecmath 1.5.2 as required by de.cismet.custom:cismet-deegree:2.3.8
+            -->
+            <dependency>
+                <groupId>java3d</groupId>
+                <artifactId>vecmath</artifactId>
+                <version>1.5.2</version>
+            </dependency>
+            
+            <!--
+                Consider upgrading to 1.6.4
+                -> org.jdesktop.swingx.graphics.GraphicsUtilities 
+                moved to org.jdesktop.swingx.util.GraphicsUtilities;
+            -->
+            <dependency>
+                <groupId>org.swinglabs</groupId>
+                <artifactId>swingx</artifactId>
+                <version>1.6</version>
+                <type>jar</type>
+            </dependency>
+            
+            <!--
+                 Prefer this to org.jdesktop:swing-worker since org.swinglabs:swingx
+                 depends also on this! 
+            -->
+            <dependency>
+                <groupId>org.swinglabs</groupId>
+                <artifactId>swing-worker</artifactId>
+                <version>1.1</version>
+                <type>jar</type>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.swinglabs</groupId>
+                <artifactId>swing-layout</artifactId>
+                <version>1.0.3</version>
+                <type>jar</type>
+            </dependency>
+            
+            <dependency>
+                <groupId>edu.umd</groupId>
+                <artifactId>piccolo</artifactId>
+                <version>1.2</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>edu.umd</groupId>
+                <artifactId>piccolox</artifactId>
+                <version>1.2</version>
+                <type>jar</type>
+            </dependency>
+            
+            <!-- Netbeans Dependencies -->
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-openide-util</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-openide-awt</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-openide-util-lookup</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-openide-dialogs</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-netbeans-api-progress</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-openide-filesystems</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-netbeans-api-visual</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.netbeans.modules</groupId>
+                <artifactId>org-netbeans-libs-javacup</artifactId>
+                <version>${netbeans.version}</version>
+                <type>jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.netbeans.api</groupId>
+                <artifactId>org-openide-dialogs-i18n-de</artifactId>
+                <!-- ${netbeans.version} does not exist! -->
+                <version>RELEASE69</version>
+                <type>jar</type>
+            </dependency>
+            
+            <dependency>
+                <groupId>net.infonode.docking</groupId>
+                <artifactId>docking</artifactId>
+                <version>1.5.0</version>
+                <type>jar</type>
+            </dependency>
+            
+            <dependency>
+                <groupId>com.jgoodies</groupId>
+                <artifactId>looks</artifactId>
+                <version>2.2.2</version>
+                <type>jar</type>
+            </dependency>
+
+            <!-- END: verified dependencies -->
+        </dependencies>
+    </dependencyManagement>
+    
+    <!--
+        skip unnecessary invocation of jalopy-maven and maven-jarsigner-plugin even if
+        profile cismet-inhouse-dev inherited from cimet-parent.pom is enabled in settings.xml
+    -->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>triemax</groupId>
+                <artifactId>jalopy-maven</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jarsigner-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

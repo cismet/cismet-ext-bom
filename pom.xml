@@ -25,7 +25,7 @@
         <!-- 
             check woodstox-core-asl version when jackson.version changes! What a mess!
         -->
-        <jackson.version>2.2.3</jackson.version>
+        <jackson.version>2.11.1</jackson.version>
         <!-- 
             Legacy Jackson 1.x version still required by swagger 1.0.1
             Manage to avoid upper bound dependencies error.

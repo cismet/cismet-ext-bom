@@ -272,7 +272,7 @@
             <dependency>
                 <groupId>de.cismet.custom</groupId>
                 <artifactId>cismet-deegree2.3</artifactId>
-                <version>7.0</version>
+                <version>7.1</version>
                 <exclusions>
                     <exclusion>
                         <groupId>jdom</groupId>

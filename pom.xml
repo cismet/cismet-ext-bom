@@ -5,7 +5,7 @@
     <parent>
         <groupId>de.cismet</groupId>
         <artifactId>cismet-parent</artifactId>
-        <version>7.0</version>
+        <version>8.0-prerelease-1</version>
     </parent>
 
     <groupId>de.cismet</groupId>
@@ -25,18 +25,9 @@
         <!-- 
             check woodstox-core-asl version when jackson.version changes! What a mess!
         -->
-        <jackson.version>2.2.3</jackson.version>
-        <!-- 
-            Legacy Jackson 1.x version still required by swagger 1.0.1
-            Manage to avoid upper bound dependencies error.
-        -->
-        <jackson.legacy.version>1.9.2</jackson.legacy.version>
-        <!-- 
-            Jetty 6 uses its own Servlet API 2.4! What a mess!
-            TODO: Update, remove or change the custom org.mortbay.jetty:servlet-api 
-            dependency when org.mortbay.jetty is upgraded!
-        -->
-        <jetty.version>6.1.25</jetty.version>
+        <!--<jackson.version>2.7.1</jackson.version>-->
+        <jackson.version>2.10.5</jackson.version>
+        <jetty.version>9.4.50.v20221201</jetty.version>
         <!--
             Powermock and Mockito Versions must be aligned!
             See https://github.com/powermock/powermock/wiki/MockitoUsage
@@ -294,7 +285,7 @@
                 <groupId>org.codehaus.woodstox</groupId>
                 <artifactId>woodstox-core-asl</artifactId>
                 <!-- WARNING always specify the same version as Jackson does! -->
-                <version>4.1.4</version>
+                <version>4.4.1</version>
             </dependency>
             
             <dependency>
@@ -453,60 +444,22 @@
                 <version>1.0-deegreeversion</version>
             </dependency>
             
-            <!--
-                TODO: Upgrade to recent swagger version and get rid of the
-                old jackson 1.x dependencies!
-            -->
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-core-asl</artifactId>
-                <version>${jackson.legacy.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-jaxrs</artifactId>
-                <version>${jackson.legacy.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-mapper-asl</artifactId>
-                <version>${jackson.legacy.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.codehaus.jackson</groupId>
-                <artifactId>jackson-xc</artifactId>
-                <version>${jackson.legacy.version}</version>
-            </dependency>
-            
             <!-- END 'problementic' dependencies -->
             
             <!-- BEGIN: verified provided dependencies 
                 scope of those dependencies must be set to provided!
             -->
             <!-- 
-            Servlet API 2.5 / Standard Location 
-            WARNING: Jetty uses org.mortbay.jetty:servlet-api instead of javax.servlet:servlet-api :-(
-            -->
-            <!--<dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>2.5</version>
-                <scope>provided</scope>
-            </dependency>
-            -->
-            
-            <!--
-                TODO: Update, remove or change this custom servlet-api dependency
-                when org.mortbay.jetty is upgraded!
+            Servlet API 3.1.0  
+            WARNING: Jetty uses javax.servlet:javax.servlet-api instead of javax.servlet:servlet-api
             -->
             <dependency>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>servlet-api</artifactId>
-                <version>2.5-20081211</version>
-                <scope>compile</scope>
-                <type>jar</type>
+                <groupId>javax.servlet</groupId>
+                <artifactId>javax.servlet-api</artifactId>
+                <version>3.1.0</version>
             </dependency>
-
+            
+            
             <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
@@ -741,17 +694,17 @@
             </dependency>
             
             <dependency>
-                <groupId>org.mortbay.jetty</groupId>
-                <artifactId>jetty</artifactId>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-server</artifactId>
                 <version>${jetty.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.mortbay.jetty</groupId>
+                <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-util</artifactId>
-                <version>6.1.25</version>
+                <version>${jetty.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.mortbay.jetty</groupId>
+                <groupId>org.eclipse.jetty</groupId>
                 <artifactId>jetty-embedded</artifactId>
                 <version>${jetty.version}</version>
             </dependency>
@@ -759,6 +712,13 @@
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>jetty-sslengine</artifactId>
                 <version>${jetty.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-servlet</artifactId>
+                <version>${jetty.version}</version>
+                <scope>compile</scope>
+                <type>jar</type>
             </dependency>
             
             <dependency>

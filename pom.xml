@@ -27,7 +27,7 @@
         -->
         <!--<jackson.version>2.7.1</jackson.version>-->
         <jackson.version>2.10.5</jackson.version>
-        <jetty.version>9.4.50.v20221201</jetty.version>
+        <jetty.version>10.0.14</jetty.version>
         <!--
             Powermock and Mockito Versions must be aligned!
             See https://github.com/powermock/powermock/wiki/MockitoUsage

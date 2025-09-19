@@ -5,7 +5,7 @@
     <parent>
         <groupId>de.cismet</groupId>
         <artifactId>cismet-parent</artifactId>
-        <version>9.0</version>
+        <version>10.1-SNAPSHOT</version>
     </parent>
 
     <groupId>de.cismet</groupId>
@@ -46,7 +46,6 @@
                             See https://github.com/cismet/cismet-ext-bom/issues/2 and
                             https://cismet.slack.com/files/pascal.dihe/F4C0V99H9/netbeans-visual-diff-standalone
         -->
-        <netbeans.version>RELEASE701</netbeans.version>
     </properties>
     
     <scm>
@@ -218,7 +217,7 @@
             <dependency>
                 <groupId>xerces</groupId>
                 <artifactId>xercesImpl</artifactId>
-                <version>2.11.0</version>
+                <version>2.12.2</version>
             </dependency>
             
             <!--

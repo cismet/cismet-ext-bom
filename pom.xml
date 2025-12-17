@@ -10,7 +10,7 @@
 
     <groupId>de.cismet</groupId>
     <artifactId>cismet-ext-bom</artifactId>
-    <version>10.0</version>
+    <version>10.1</version>
     <packaging>pom</packaging>
     
     <name>cismet ext BOM</name>
@@ -27,8 +27,8 @@
             check woodstox-core-asl version when jackson.version changes! What a mess!
         -->
         <!--<jackson.version>2.7.1</jackson.version>-->
-        <jackson.version>2.10.5</jackson.version>
-        <jetty.version>9.4.50.v20221201</jetty.version>
+        <jackson.version>2.20.1</jackson.version>
+        <jetty.version>11.0.26</jetty.version>
         <!--
             Powermock and Mockito Versions must be aligned!
             See https://github.com/powermock/powermock/wiki/MockitoUsage
@@ -52,7 +52,7 @@
         <connection>https://github.com/cismet/cismet-ext-bom.git</connection>
         <developerConnection>scm:git:git@github.com:cismet/cismet-ext-bom.git</developerConnection>
         <url>https://github.com/cismet/cismet-ext-bom</url>
-        <tag>v10.0</tag>
+        <tag>v10.1</tag>
     </scm>
     
     <ciManagement>
@@ -505,15 +505,9 @@
             <!-- BEGIN: verified dependencies -->
                  
             <dependency>
-                <groupId>commons-httpclient</groupId>
-                <artifactId>commons-httpclient</artifactId>
-                <version>3.1</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>commons-logging</groupId>
-                        <artifactId>commons-logging</artifactId>
-                    </exclusion>
-                </exclusions>
+                <groupId>org.apache.httpcomponents.client5</groupId>
+                <artifactId>httpclient5</artifactId>
+                <version>5.5.1</version>
             </dependency>
             
             <!--
@@ -575,9 +569,9 @@
             </dependency>
             
             <dependency>
-                <groupId>commons-lang</groupId>
-                <artifactId>commons-lang</artifactId>
-                <version>2.6</version>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-lang3</artifactId>
+                <version>3.20.0</version>
                 <type>jar</type>
             </dependency>
             

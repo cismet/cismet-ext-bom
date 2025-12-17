@@ -28,6 +28,7 @@
         -->
         <!--<jackson.version>2.7.1</jackson.version>-->
         <jackson.version>2.20.1</jackson.version>
+        <jackson-annotations.version>2.20</jackson-annotations.version>
         <jetty.version>11.0.26</jetty.version>
         <!--
             Powermock and Mockito Versions must be aligned!
@@ -607,7 +608,7 @@
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
-                <version>${jackson.version}</version>
+                <version>${jackson-annotations.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.module</groupId>

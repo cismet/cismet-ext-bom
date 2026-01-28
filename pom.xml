@@ -10,7 +10,7 @@
 
     <groupId>de.cismet</groupId>
     <artifactId>cismet-ext-bom</artifactId>
-    <version>10.1.1</version>
+    <version>10.1.2</version>
     <packaging>pom</packaging>
     
     <name>cismet ext BOM</name>
@@ -21,8 +21,8 @@
     -->
     <properties>
         <slf4j.version>2.0.16</slf4j.version>
-        <log4j.version>2.24.3</log4j.version>
-        <jersey.version>1.17.1</jersey.version>
+        <log4j.version>2.25.3</log4j.version>
+        <jersey.version>3.1.5</jersey.version>
         <!-- 
             check woodstox-core-asl version when jackson.version changes! What a mess!
         -->
@@ -53,7 +53,7 @@
         <connection>https://github.com/cismet/cismet-ext-bom.git</connection>
         <developerConnection>scm:git:git@github.com:cismet/cismet-ext-bom.git</developerConnection>
         <url>https://github.com/cismet/cismet-ext-bom</url>
-        <tag>v10.1.1</tag>
+        <tag>v10.1.2</tag>
     </scm>
     
     <ciManagement>
@@ -464,13 +464,13 @@
                 scope of those dependencies must be set to provided!
             -->
             <!-- 
-            Servlet API 3.1.0  
-            WARNING: Jetty uses javax.servlet:javax.servlet-api instead of javax.servlet:servlet-api
+            Servlet API 5.0.0  
+            WARNING: Jetty Version 11 uses jetty-jakarta-servlet-api instead of javax.servlet:javax.servlet-api
             -->
             <dependency>
-                <groupId>javax.servlet</groupId>
-                <artifactId>javax.servlet-api</artifactId>
-                <version>3.1.0</version>
+                <groupId>org.eclipse.jetty.toolchain</groupId>
+                <artifactId>jetty-jakarta-servlet-api</artifactId>
+                <version>5.0.2</version>
             </dependency>
             
             
@@ -661,38 +661,54 @@
             </dependency>-->
             
             <dependency>
-                <groupId>com.sun.jersey</groupId>
+                <groupId>org.glassfish.jersey.core</groupId>
                 <artifactId>jersey-server</artifactId>
                 <version>${jersey.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.sun.jersey</groupId>
-                <artifactId>jersey-core</artifactId>
+                <groupId>org.glassfish.jersey.containers</groupId>
+                <artifactId>jersey-container-servlet</artifactId>
                 <version>${jersey.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.sun.jersey</groupId>
-                <artifactId>jersey-servlet</artifactId>
-                <version>${jersey.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.sun.jersey.contribs</groupId>
+                <groupId>org.glassfish.jersey.containers</groupId>
                 <artifactId>jersey-apache-client</artifactId>
                 <version>${jersey.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.sun.jersey.contribs</groupId>
-                <artifactId>jersey-multipart</artifactId>
-                <version>${jersey.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.sun.jersey</groupId>
+                <groupId>org.glassfish.jersey.core</groupId>
                 <artifactId>jersey-client</artifactId>
                 <version>${jersey.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.sun.jersey</groupId>
+                <groupId>org.glassfish.jersey.containers</groupId>
                 <artifactId>jersey-json</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-common</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.media</groupId>
+                <artifactId>jersey-media-json-jackson</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.jersey.containers</groupId>
+                <artifactId>jersey-container-servlet</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.containers</groupId>
+                <artifactId>jersey-container-servlet-core</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jersey.media</groupId>
+                <artifactId>jersey-media-jaxb</artifactId>
                 <version>${jersey.version}</version>
             </dependency>
             

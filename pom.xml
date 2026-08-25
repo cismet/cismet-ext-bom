@@ -313,8 +313,11 @@
                 Resolve Require upper bound dependencies error for 
                 com.lowagie:itext:2.0.8 from org.xhtmlrenderer:core-renderer:R8
                 
-                -> Use the same version as net.sf.jasperreports:jasperreports:6.0.4
-                WARNING: Update also com.lowagie:itext:2.1.7.js2 when updating jasperreports!
+                ATTENTION: since jasperreports 6.21.5 the PDF backend is
+                com.github.librepdf:openpdf (a fork of iText that keeps the
+                com.lowagie.text packages). itext and openpdf on the same
+                classpath => duplicate classes (banned by the enforcer).
+                Consumers must exclude com.lowagie:itext; openpdf supplies it.
             -->
             <dependency>
                 <groupId>com.lowagie</groupId>
@@ -324,12 +327,13 @@
             
             <!--
                 Avoid JASPER XML API problems 
-                WARNING: Update also com.lowagie:itext:2.0.8 when updating jasperreports!
+                WARNING: Update also ar.com.fdvs:DynamicJasper and check
+                com.github.librepdf:openpdf when updating jasperreports!
             -->
             <dependency>
                 <groupId>net.sf.jasperreports</groupId>
                 <artifactId>jasperreports</artifactId>
-                <version>6.0.4</version>
+                <version>6.21.5</version>
                 <exclusions>
                     <exclusion>
                         <groupId>javax.xml.stream</groupId>
@@ -363,6 +367,30 @@
                         <groupId>jfree</groupId>
                         <artifactId>jfreechart</artifactId>
                     </exclusion>-->
+                </exclusions>
+            </dependency>
+
+            <!--
+                DynamicJasper must match jasperreports!
+                DynamicJasper 5.0.2 was compiled against the deprecated
+                JRPen.setLineWidth(float) overload which was removed in
+                jasperreports 6.x -> NoSuchMethodError at report generation.
+                WARNING: Update also ar.com.fdvs:DynamicJasper when updating jasperreports!
+            -->
+            <dependency>
+                <groupId>ar.com.fdvs</groupId>
+                <artifactId>DynamicJasper</artifactId>
+                <version>5.3.9</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>commons-logging</groupId>
+                        <artifactId>commons-logging</artifactId>
+                    </exclusion>
+                    <!-- declares a version RANGE [6.20.1, 6.20.4] - use the managed version -->
+                    <exclusion>
+                        <groupId>net.sf.jasperreports</groupId>
+                        <artifactId>jasperreports</artifactId>
+                    </exclusion>
                 </exclusions>
             </dependency>
                 
